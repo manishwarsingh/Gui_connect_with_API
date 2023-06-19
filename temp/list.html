@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Foreteens.com/list</title>
+ <link href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+<style>
+
+.table-wrapper {
+    width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.table-title {
+    padding-bottom: 10px;
+    margin: 0 0 10px;
+}
+.table-title h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+}
+.table-title .add-new {
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 13px;
+}
+.table-title .add-new i {
+    margin-right: 4px;
+}
+table.table {
+    table-layout: fixed;
+}
+table.table tr th, table.table tr td {
+    border-color: #e9e9e9;
+}
+table.table th i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+table.table th:last-child {
+    width: 100px;
+}
+table.table td a {
+    cursor: pointer;
+    display: inline-block;
+    margin: 3px;
+    min-width: 24px;
+}    
+table.table td a.add {
+    color: #27C46B;
+}
+table.table td a.edit {
+    color: #FFC107;
+}
+table.table td a.delete {
+    color: #E34724;
+}
+table.table td i {
+    font-size: 19px;
+}
+table.table td a.add i {
+    font-size: 24px;
+    margin-right: -1px;
+    position: relative;
+    top: 3px;
+}    
+table.table .form-control {
+    height: 32px;
+    line-height: 32px;
+    box-shadow: none;
+    border-radius: 2px;
+}
+table.table .form-control.error {
+    border-color: #f50000;
+}
+table.table td .add {
+    display: none;
+}
+table.table tbody{
+    font-size: 16px;
+}
+
+</style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">ForeTees</a>
+      </div>
+    </div>
+</nav>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flash-msg">
+            {% for message in messages %}
+            <li class="msg-success" style="color:red">
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>       
+    {% endif %}
+{% endwith %}
+
+<div class="container-lg">
+
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-8"><h2>Foretees <b> Member Scheduler </b></h2></div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+            
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <!-- <th>Persons</th> -->
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for row in rows %}
+                     <tr>
+                        <td>{{row.day}}</td>
+                        <td>{{row.stime}}</td>
+                        <!-- <td> {{row.person}}</td> -->
+                        <td>
+                            <!-- #Edit button -->
+                            <a href="{{ url_for('edit', id=row.id)}}" class="btn btn-default edit" title="Edit day data" data-toggle="tooltip" id="{{row.id}}">Edit</i></a>
+
+                            <!-- #Delete button -->
+                            <a href="{{ url_for('delete', id=row.id)}}" class="btn btn-default error delete" title="Delete day data" data-toggle="tooltip" id="{{row.id}}">Delete</i></a>
+
+                           </td>   
+                     </tr>
+                 {% endfor %}
+             </tbody>
+            </table>
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default info">
+              <a href="/" > Back
+              </a>
+            </button>
+          </div>
+        </div>
+    </div>
+</div>     
+</body>
+</html>
