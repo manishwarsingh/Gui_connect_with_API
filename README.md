@@ -1,4 +1,4 @@
-# Fortees_Gui_connect_with_API
+# App_Gui_connect_with_API
 we can get the data from the database and return to the browser through api's.
 
 ## Get Started
